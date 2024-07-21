@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and Deploy Node.js App to Azure Web App - aiavatarte
 
 on:
@@ -13,26 +16,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '18.x'  # Adjust according to your requirement
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build the Project
+      - name: Run build (if present)
         run: npm run build --if-present
 
-      - name: Upload Artifact for Deployment Job
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
           path: |
-            build/  # Adjust this to your actual build output directory
-            !node_modules/**  # Exclude node_modules
-            !**/.git/**  # Exclude git metadata
-            !**/README.md  # Exclude documentation if not needed
+            ./
+            !node_modules/**  # Exclude node_modules if not needed
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,7 +43,7 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download Artifact from Build Job
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: node-app
