@@ -33,7 +33,9 @@ jobs:
           name: node-app
           path: |
             ./
-            !node_modules/**  # Exclude node_modules if not needed
+            !node_modules/**  # Exclude node_modules
+            !**/.git/**       # Exclude git metadata
+            !**/README.md     # Exclude documentation if not needed
 
   deploy:
     runs-on: ubuntu-latest
