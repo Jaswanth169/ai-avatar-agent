@@ -1,4 +1,13 @@
 {
+  "name": "ai-avatar-agent",
+  "version": "1.0.0",
+  "description": "AI Avatar Agent",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'No build script defined'",
+    "test": "echo 'No test script defined'"
+  },
   "dependencies": {
     "@langchain/azure-openai": "^0.0.11",
     "@langchain/community": "^0.2.20",
