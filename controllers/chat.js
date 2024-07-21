@@ -1,15 +1,12 @@
+const { getChatCompletion } = require('../services/chatService');
 
-const chatService = require('../services/chatService');
-
-async function getChatResponse(req, res){
-  const userMessage = req.body;
+const getChatResponse = async (req, res) => {
   try {
-    // const userMessage = [messages];
-    const response = await chatService.getChatCompletion( userMessage);
-    console.log(response);
-    res.status(200).json( response );
+    const response = await getChatCompletion(req.body);
+    res.json(response);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to get response from OpenAI' });
+    console.error('Error handling chat request:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
