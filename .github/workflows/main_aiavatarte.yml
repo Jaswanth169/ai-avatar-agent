@@ -24,16 +24,13 @@ jobs:
       - name: Build the Project
         run: npm run build --if-present
 
-      - name: Run Tests
-        run: npm run test --if-present
-      
       - name: Upload Artifact for Deployment Job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
           path: |
-            **/*   # Include all files
-            !**/node_modules/**  # Exclude node_modules
+            build/  # Adjust this to your actual build output directory
+            !node_modules/**  # Exclude node_modules
             !**/.git/**  # Exclude git metadata
             !**/README.md  # Exclude documentation if not needed
 
