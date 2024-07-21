@@ -1,12 +1,11 @@
 const express = require('express');
-const { API_ENDPOINTS } = require('./constants/apiEndpoints');
+const cors = require('cors');
 require('dotenv').config();
+const appRoutes = require('./app');  // Ensure app.js is imported here
 
-// Initialize the app
 const app = express();
 
-// Middleware and routes setup here
-// For example, if you are using JSON and URL-encoded form data
+app.use(cors());  // Enable CORS
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -15,8 +14,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// Use the routes defined in app.js
+app.use(appRoutes);
+
 // Ensure the app listens on the port defined by Azure (or fallback to 3000 for local development)
-const PORT = process.env.PORT || API_ENDPOINTS.BACKEND_PORT || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
