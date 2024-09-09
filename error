@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+FileNotFoundError                         Traceback (most recent call last)
+Cell In[5], line 45
+     43     if paragraph.strip():  # Ensure the paragraph is not empty
+     44         question = "What is the main idea of the following paragraph: " + paragraph
+---> 45         answer = ask_llama(question, model_path)
+     47         qa_pairs.append({
+     48             "question": question,
+     49             "answer": answer.strip(),
+     50             "context": paragraph
+     51         })
+     53 # Save the generated QA pairs to a JSON file
+
+Cell In[5], line 9
+      6 def ask_llama(question, model_path):
+      7     cmd = ['./main', '-m', model_path, '--interactive', '--n-predict', '128']
+----> 9     process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+     10     process.stdin.write(f"{question}\n".encode('utf-8'))
+     11     process.stdin.flush()
+
+File c:\Users\j.sabbineni\AppData\Local\Programs\Python\Python311\Lib\subprocess.py:1026, in Popen.__init__(self, args, bufsize, executable, stdin, stdout, stderr, preexec_fn, close_fds, shell, cwd, env, universal_newlines, startupinfo, creationflags, restore_signals, start_new_session, pass_fds, user, group, extra_groups, encoding, errors, text, umask, pipesize, process_group)
+   1022         if self.text_mode:
+   1023             self.stderr = io.TextIOWrapper(self.stderr,
+   1024                     encoding=encoding, errors=errors)
+-> 1026     self._execute_child(args, executable, preexec_fn, close_fds,
+...
+   1553     self._close_pipe_fds(p2cread, p2cwrite,
+   1554                          c2pread, c2pwrite,
+   1555                          errread, errwrite)
+
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...
